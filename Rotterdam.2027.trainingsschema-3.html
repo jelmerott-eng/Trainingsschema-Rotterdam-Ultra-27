@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rotterdam 2027 – trainingsschema</title>
+<style>
+:root{--bg:#f1f5f8;--card:#fff;--ink:#14222e;--mut:#5b6e7c;--line:#dce4ea;
+--p0:#0f8b8d;--p1:#2f6fd0;--p2:#7a4fd1;--p3:#e0602a;--p4:#2f9e5b;
+--kwal-b:#ffe3d1;--kwal-t:#963a0b;--lang-b:#d9e7ff;--lang-t:#1b4693;--run-b:#e5ecf1;--run-t:#3a4f5f;
+--gym-b:#ebe2ff;--gym-t:#55309f;--zwem-b:#d3f2f5;--zwem-t:#0a636d;--race-b:#ffe7a0;--race-t:#5e4300;--rust-t:#7b8c99;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1921;--card:#16242e;--ink:#e8eff4;--mut:#93a6b4;--line:#293a46;
+--kwal-b:#4a2412;--kwal-t:#ffb48f;--lang-b:#17305c;--lang-t:#a9c8ff;--run-b:#243845;--run-t:#b8cad6;--gym-b:#33235c;--gym-t:#cdb8ff;--zwem-b:#0c3e44;--zwem-t:#8fe0ea;--race-b:#5a4400;--race-t:#ffe08a;--rust-t:#7f93a1;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1921;--card:#16242e;--ink:#e8eff4;--mut:#93a6b4;--line:#293a46;
+--kwal-b:#4a2412;--kwal-t:#ffb48f;--lang-b:#17305c;--lang-t:#a9c8ff;--run-b:#243845;--run-t:#b8cad6;--gym-b:#33235c;--gym-t:#cdb8ff;--zwem-b:#0c3e44;--zwem-t:#8fe0ea;--race-b:#5a4400;--race-t:#ffe08a;--rust-t:#7f93a1;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 "Barlow",system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:14px 14px 40px}
+h1{font:700 30px/1.05 "Barlow Condensed","Barlow",system-ui,sans-serif;margin:6px 0 2px;letter-spacing:.2px}
+.sub{color:var(--mut);margin:0 0 12px}
+.hero{display:flex;gap:10px;margin:10px 0 14px}
+.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.stat b{display:block;font:700 28px/1 "Barlow Condensed","Barlow",system-ui,sans-serif}
+.stat span{color:var(--mut);font-size:13px}
+.tabs{display:flex;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:3px;margin-bottom:14px}
+.tabs button{flex:1;border:0;background:none;color:var(--mut);font:600 15px "Barlow",system-ui,sans-serif;padding:9px 4px;border-radius:9px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--p1);color:#fff}
+.tabs button{font-size:14px;padding:9px 2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px;color:var(--mut);margin:0 0 12px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+details{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--pc);border-radius:12px;margin-bottom:9px;overflow:hidden}
+details.now{box-shadow:0 0 0 2px var(--pc)}
+summary{display:flex;align-items:center;gap:11px;padding:11px 12px;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+.wn{flex:none;width:34px;height:34px;border-radius:9px;background:var(--pc);color:#fff;display:flex;align-items:center;justify-content:center;font:700 19px "Barlow Condensed","Barlow",system-ui,sans-serif}
+.sm{flex:1;min-width:0}.sm b{display:block}.sm small{color:var(--mut)}
+.pg{font-size:13px;color:var(--mut);white-space:nowrap}
+.days{border-top:1px solid var(--line)}
+.day{display:flex;gap:9px;padding:9px 12px;border-bottom:1px solid var(--line);align-items:flex-start}
+.day:last-child{border-bottom:0}
+.day.today{background:color-mix(in srgb,var(--pc) 12%,transparent)}
+.dn{flex:none;width:30px;font-weight:700;line-height:1.1}.dn small{display:block;color:var(--mut);font-weight:500;font-size:12px}
+.its{flex:1;min-width:0}
+.it{display:flex;gap:7px;align-items:baseline;margin-bottom:4px}.it:last-child{margin-bottom:0}
+.chip{flex:none;font-size:12px;font-weight:700;padding:1px 8px;border-radius:20px}
+.chip.kwal{background:var(--kwal-b);color:var(--kwal-t)}.chip.lang{background:var(--lang-b);color:var(--lang-t)}
+.chip.run{background:var(--run-b);color:var(--run-t)}.chip.gym{background:var(--gym-b);color:var(--gym-t)}
+.chip.zwem{background:var(--zwem-b);color:var(--zwem-t)}.chip.race{background:var(--race-b);color:var(--race-t)}
+.chip.rust{background:none;color:var(--rust-t);padding-left:0}
+input[type=checkbox]{flex:none;width:22px;height:22px;accent-color:var(--pc);margin:1px 0 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.card h2{font:700 21px/1.1 "Barlow Condensed","Barlow",system-ui,sans-serif;margin:0 0 8px}
+.card p,.card ul{margin:0 0 8px}.card ul{padding-left:19px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{text-align:left;padding:7px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:13px}
+.note{color:var(--mut);font-size:13px}
+.bad{border-left:6px solid var(--p3)}
+:focus-visible{outline:3px solid var(--p1);outline-offset:2px}
+.f{display:block;font-size:14px;color:var(--mut);margin-bottom:9px}.f input{display:block;width:100%;box-sizing:border-box;margin-top:3px;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:16px "Barlow",system-ui,sans-serif}
+.z{display:block;color:var(--mut);font-size:13px}
+.ak{display:block;color:var(--mut);font-size:13px;margin-top:6px}.ak input{width:70px;padding:6px 8px;margin:0 4px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:16px system-ui,sans-serif}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin:8px 0 12px}.bar i{display:block;height:100%;background:var(--p1);border-radius:6px}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px}.sg b{display:block;font:700 22px/1 "Barlow Condensed","Barlow",system-ui,sans-serif}.sg span{color:var(--mut);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Kwart + Marathon Rotterdam</h1>
+<p class="sub">Zondag 11 april 2027 · 52,7 km op één dag</p>
+<div class="hero">
+<div class="stat"><b id="cd">–</b><span>dagen tot de start</span></div>
+<div class="stat"><b id="wk">–</b><span id="wks">deze week</span></div>
+</div>
+<div class="tabs" role="tablist">
+<button role="tab" aria-selected="true" data-t="s">Schema</button>
+<button role="tab" aria-selected="false" data-t="b">Statistieken</button>
+<button role="tab" aria-selected="false" data-t="z">Tempo’s</button>
+<button role="tab" aria-selected="false" data-t="r">Racedag</button>
+</div>
+
+<section id="s">
+<div class="legend">
+<span><i style="background:var(--p0)"></i>Herstel en basis</span>
+<span><i style="background:var(--p1)"></i>Aerobe opbouw</span>
+<span><i style="background:var(--p2)"></i>Marathonspecifiek</span>
+<span><i style="background:var(--p3)"></i>Specifiek 52,7 km</span>
+<span><i style="background:var(--p4)"></i>Taper</span>
+</div>
+<div id="weeks"></div>
+<p class="note">Tik op een week om de dagen te zien. Vink een dag af als je hem hebt gedaan; dat blijft op dit toestel bewaard. Pijn van 5/10 of meer, of een veranderde gang: stoppen en laten beoordelen. Tempo’s zijn schattingen tot de tests in week 5 en 16.</p>
+</section>
+
+<section id="b" hidden><div class="card" id="bs"></div><div class="card" id="bc"></div><div class="card" id="be"></div></section>
+
+<section id="z" hidden>
+<div class="card"><h2>Jouw testresultaten</h2><p class="note">Vul in wat je hebt, in m:ss. De tempo’s en hartslagen in het schema passen zich meteen aan.</p>
+<label class="f">10 km-tijd (nu of na de test in week 16)<input id="p10" placeholder="44:00"></label>
+<label class="f">Week 5, 30-min test: gemiddeld tempo per km<input id="pt" placeholder="4:35"></label>
+<label class="f">Week 5, 30-min test: gem. hartslag laatste 20 min<input id="ph" inputmode="numeric" placeholder="170"></label>
+<label class="f">Maximale hartslag (optioneel)<input id="pm" inputmode="numeric" placeholder="190"></label>
+<label class="f">Week 18, tempo van het marathonblok per km<input id="pp" placeholder="5:20"></label></div>
+<div class="card"><h2>Jouw zones</h2><div id="zt"></div></div>
+<div class="card" hidden><h2>Tempozones (oud)</h2>
+<table>
+<tr><th>Zone</th><th>Gevoel</th><th>Tempo</th></tr>
+<tr><td><span class="chip run">Rustig</span></td><td>Praten in volle zinnen, RPE 3–4</td><td>5:25–5:55 /km</td></tr>
+<tr><td><span class="chip lang">MP</span></td><td>Marathontempo, RPE 5–6</td><td>5:15–5:25 /km</td></tr>
+<tr><td><span class="chip kwal">Drempel</span></td><td>Comfortabel zwaar, RPE 7</td><td>4:30–4:45 /km</td></tr>
+<tr><td><span class="chip kwal">Interval</span></td><td>3–5 min, RPE 8–9</td><td>4:05–4:15 /km</td></tr>
+<tr><td><span class="chip run">Strides</span></td><td>20–30 s vlot en ontspannen</td><td>±3:50–4:00 /km</td></tr>
+</table></div>
+<div class="card"><h2>Voeding in training</h2>
+<table>
+<tr><th>Weken</th><th>Koolhydraten tijdens lange duurloop</th></tr>
+<tr><td>5–8</td><td>50–55 g/uur</td></tr>
+<tr><td>9–12</td><td>60 g/uur</td></tr>
+<tr><td>13–16</td><td>65 g/uur</td></tr>
+<tr><td>17+</td><td>70 g/uur, mits goed verdragen</td></tr>
+</table>
+<p class="note">Gebruik de wedstrijdproducten en het wedstrijdontbijt. Bij maagklachten blijf je bij de hoeveelheid die rustig valt.</p></div>
+<div class="card"><h2>Terugtreden of overslaan</h2>
+<ul><li>Pijn 3–4/10 of toenemend: inkorten of vervangen door zwemmen of fietsen.</li>
+<li>Meer dan 10 slagen hoger bij hetzelfde tempo op 3 rustige trainingen achter elkaar: 2–3 dagen rust, en bij klachten naar de huisarts.</li>
+<li>Koorts of klachten onder de nek: rust.</li>
+<li>4–7 dagen gemist: laatste week herhalen. Haal kilometers nooit in.</li></ul></div>
+</section>
+
+<section id="r" hidden>
+<div class="card"><h2>Kwart marathon (±10,55 km)</h2>
+<p>4:50–5:00 /km (±51–53 min) als je tijdvenster dat vraagt, nooit sneller dan 4:44 /km. Is er ruimte: 5:10–5:20 /km. Vanaf minuut 30 een gel of 200–300 ml drinkmix.</p></div>
+<div class="card"><h2>Pauze</h2>
+<ul><li>5 minuten uitwandelen.</li>
+<li>Binnen 15 minuten 400–600 ml met natrium en 30–60 g koolhydraten, laag in vezels.</li>
+<li>Duurt de pauze langer dan 60 minuten: nog eens 30–60 g in het volgende uur.</li>
+<li>Droge kleding, toilet, niet langer dan 30 minuten zitten. Gel 10 minuten voor de start.</li></ul></div>
+<div class="card bad"><h2>Niet starten als</h2>
+<p>je pijn hebt die je loop verandert, misselijkheid die niet wegtrekt, of duizeligheid. Spreek dit vooraf met jezelf af.</p></div>
+<div class="card"><h2>Marathon</h2>
+<table>
+<tr><th>Deel</th><th>Tempo</th></tr>
+<tr><td>Km 0–10</td><td>5:25–5:30 /km, houd je in</td></tr>
+<tr><td>Km 10–30</td><td>5:20–5:25 /km</td></tr>
+<tr><td>Km 30–42</td><td>Op gevoel, maximaal +10 s/km</td></tr>
+</table>
+<p class="note">Verwacht 3:45–3:55 voor de marathon zelf. Plan A (ambitieus): kwart 4:50, marathon 5:15–5:20. Plan B: kwart 5:15, marathon 5:30. Beslis na week 16 en 18.</p></div>
+<div class="card"><h2>Voeding en vocht</h2>
+<ul><li>Vanaf km 5 elke 20 minuten 25 g koolhydraten: 60–75 g/uur.</li>
+<li>Kleine slokken water bij elk punt; natrium naar behoefte.</li>
+<li>Cafeïne vanaf ±km 25, alleen als je het in training hebt getest.</li></ul></div>
+<div class="card"><h2>Als het tegenzit</h2>
+<ul><li><b>Moe na km 30–35:</b> +10–20 s/km, 30–60 s wandelen bij elk verzorgingspunt, extra gel, in blokken van 5 km denken.</li>
+<li><b>Maag:</b> gels stoppen, kleine slokken, 2 minuten wandelen en opnieuw proberen.</li>
+<li><b>Scherpe pijn of veranderde gang:</b> wandelen en stoppen.</li>
+<li><b>Pijn op de borst, duizelig of flauw:</b> stoppen en direct hulp vragen.</li></ul></div>
+</section>
+</div>
+
+<script>
+var WK=[
+[26,'Pijnvrij herstarten','6','6 + 6×20 s strides','','10','4'],
+[28,'Opbouw','6','7 + 8×30 s strides','','11','4'],
+[31,'Opbouw','7','8: 6×1 min vlot, 1 min pauze','','12','4'],
+[24,'Herstelweek','6','6 + 6 strides','','9','3'],
+[33,'Start aerobe opbouw en test','7','9: 2×10 min drempel + 30-min test','','13','4'],
+[36,'Volume','8','9: 3×8 min drempel','','15','4'],
+[39,'Volume','8','10: 4×6 min drempel','','17 (laatste 3 km vlot)','4'],
+[30,'Herstelweek','6','8 + 6 strides','','12','4'],
+[40,'Aerobe kracht','7','10: 6×3 min interval, 2 min jog','6','17','-'],
+[43,'Volume','8','10: 3×10 min drempel','6','19','-'],
+[46,'Piek fase 2','8','11: 2×15 min drempel','7','20 (laatste 4 km MP)','-'],
+[36,'Herstelweek','7','8 + 6 strides','5','16','-'],
+[47,'Start marathonspecifiek','8','11: 3×2 km MP, 1 km rustig','6','22 (laatste 6 km MP)','-'],
+[50,'Eerste back-to-back','8','11: 3×10 min drempel','','24 (2×6 km MP)','7'],
+[53,'Specifiek','8','12: 3×3 km MP, 1 km rustig','5','28 (3×5 km MP)','-'],
+[40,'Herstel en 10 km-test','7','8 + 6 strides','5','6','14 incl. 10 km-test'],
+[54,'Start fase 4, back-to-back','7','10: 2×5 km MP','','30 (2×8 km MP)','7'],
+[57,'Generale repetitie','7','8: 4×1 km MP','5','Dubbel: 10,5 km kwarttempo, pauze, dan 26 km (10 rustig, 12 MP, 4 rustig)','-'],
+[48,'Laatste zware week','7','10: 2×5 km MP','5','20 (3×4 km MP)','6'],
+[38,'Taper 1','7','9: 3×2 km MP','5','17 (2×4 km MP)','-'],
+[28,'Taper 2','6','8: 4×1 km MP','4','10','-'],
+[13,'Wedstrijdweek','6 + 4 strides','20 min rustig (optioneel)','4 (3×1 min MP)','3 shakeout (optioneel)','RACE']
+];
+var T={rust:'Rust',run:'Rustig',kwal:'Kwaliteit',lang:'Lang',gym:'Gym',zwem:'Zwemmen',race:'Race'};
+var DN=['Ma','Di','Wo','Do','Vr','Za','Zo'],MN=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+var PC=['var(--p0)','var(--p1)','var(--p2)','var(--p3)','var(--p4)'];
+var st={};try{st=JSON.parse(localStorage.getItem('mt27'))||{}}catch(e){}
+var ACT={};try{ACT=JSON.parse(localStorage.getItem('mt27a'))||{}}catch(e){}
+var EFF={};try{EFF=JSON.parse(localStorage.getItem('mt27e'))||{}}catch(e){}
+function isEasy(its){return its.some(function(x){return x[0]==='run'&&!/MP|test/.test(x[1])})}
+function dayKm(its){var k=0;its.forEach(function(x){if(x[0]==='run'||x[0]==='kwal'||x[0]==='lang')k+=kmOf(x[1])});return k}
+function fillAct(){document.querySelectorAll('input[data-a]').forEach(function(i){var v=ACT[i.dataset.a];i.value=v!=null?String(v).replace('.',','):''});refresh()}
+var prof={t10:'',tp:'',th:'',hm:'',mp:''};try{var pp0=JSON.parse(localStorage.getItem('mt27p'));if(pp0)prof=pp0}catch(e){}
+function sec(s){var m=/^\s*(\d{1,2}):(\d{2})\s*$/.exec(s||'');return m?+m[1]*60+ +m[2]:0}
+function mm(x){x=Math.round(x);return Math.floor(x/60)+':'+('0'+x%60).slice(-2)}
+function rg(a,b){return mm(a)+'–'+mm(b)+' /km'}
+function Zs(){var t=sec(prof.t10),p10=(t>1500&&t<4500?t:2640)/10,T=sec(prof.tp)||p10*1.035,I=p10*.95,MP=sec(prof.mp)||T*1.17,lt=+prof.th||(+prof.hm?+prof.hm*.9:0);
+return {lt:lt,e:[MP*1.03,MP*1.11,[.80,.89]],mp:[MP-5,MP+5,[.89,.94]],t:[T-3,T+10,[.95,1]],i:[I-6,I+4,[1,1.06]],s:[I*.95-4,I*.95+4,null],k:[MP*.93-5,MP*.93+5,null]}}
+var NM={e:'rustig',mp:'MP',t:'drempel',i:'interval',s:'strides',k:'kwart'};
+function hrs(r,L){return L&&r[2]?' · '+Math.round(L*r[2][0])+'–'+Math.round(L*r[2][1])+' slagen/min':''}
+function zt(k,Z){var r=Z[k];return rg(r[0],r[1])+hrs(r,Z.lt)}
+function zk(x){var t=x[0],s=x[1];if(/incl\. 10 km-test/.test(s))return '';if(/^Dubbel/.test(s))return 'dub';if(t==='lang')return /MP/.test(s)?'lm':'e';if(t==='kwal')return /interval/.test(s)?'i':/drempel/.test(s)?'t':/MP/.test(s)?'mp':/strides|vlot/.test(s)?'s':'e';if(t==='run')return /MP/.test(s)?'mp':'e';return ''}
+function applyZ(){var Z=Zs();document.querySelectorAll('.z').forEach(function(el){var k=el.dataset.z,o='';if(k==='lm')o='rustig '+zt('e',Z)+' · MP '+zt('mp',Z);else if(k==='dub')o='kwart '+zt('k',Z)+' · MP '+zt('mp',Z);else if(Z[k])o=NM[k]+' '+zt(k,Z);el.textContent=o})}
+function renderZones(){var Z=Zs(),L={e:'Rustig',mp:'Marathontempo',t:'Drempel',i:'Interval',s:'Strides',k:'Kwart-race (plan)'},h='<table><tr><th>Zone</th><th>Tempo</th><th>Hartslag</th></tr>';
+['e','mp','t','i','s','k'].forEach(function(k){var r=Z[k];h+='<tr><td>'+L[k]+'</td><td>'+rg(r[0],r[1])+'</td><td>'+(Z.lt&&r[2]?Math.round(Z.lt*r[2][0])+'–'+Math.round(Z.lt*r[2][1]):'–')+'</td></tr>'});
+h+='</table><p class="note">'+(sec(prof.t10)||sec(prof.tp)||sec(prof.mp)?'Gebaseerd op jouw invoer.':'Standaardwaarden (aanname: 10 km in 44:00). Vul je testresultaten in.')+(Z.lt?' Hartslagzones zijn afgeleid van drempelhartslag '+Math.round(Z.lt)+'.':' Vul drempelhartslag of max. hartslag in voor hartslagzones.')+' Alles zijn schattingen; stel bij als het gevoel (RPE) afwijkt.</p>';document.getElementById('zt').innerHTML=h}
+var FL={p10:'t10',pt:'tp',ph:'th',pm:'hm',pp:'mp'};
+function fillForm(){for(var id in FL){var el=document.getElementById(id);if(el)el.value=prof[FL[id]]||''}}
+function initForm(){fillForm();for(var id in FL)(function(id){document.getElementById(id).addEventListener('input',function(e){prof[FL[id]]=e.target.value.trim();try{localStorage.setItem('mt27p',JSON.stringify(prof))}catch(x){}save();applyZ();renderZones()})})(id)}
+var ref=null,tmr=null;
+function save(){try{localStorage.setItem('mt27',JSON.stringify(st))}catch(e){}
+if(ref){clearTimeout(tmr);tmr=setTimeout(function(){ref.set({done:st,prof:prof,act:ACT,eff:EFF}).catch(function(){})},600)}}
+function refresh(){document.querySelectorAll('input[data-k]').forEach(function(c){c.checked=!!st[c.dataset.k]});
+document.querySelectorAll('details[data-w]').forEach(function(d){var a=d.querySelectorAll('input[type=checkbox]'),k=0;a.forEach(function(x){if(x.checked)k++});document.getElementById('pg'+d.dataset.w).textContent=k+'/'+a.length;renderStats()})}
+var D=864e5,S=new Date(2026,10,9),R=new Date(2027,3,11),now=new Date();now.setHours(0,0,0,0);
+var dd=Math.round((now-S)/D),cur=Math.min(21,Math.max(0,Math.floor(dd/7)));
+function n(s){return /^\d+ min/.test(s)?s:s.replace(/^(\d+)/,'$1 km')}
+function build(i){
+var w=i+1,r=WK[i],di=r[2],wo=r[3],dp=r[4],za=r[5],zo=r[6],b2b=[14,17,19].indexOf(w)>-1;
+var gA=w<=12?'Gym A: eenbenige kracht, core, bovenlichaam':w<=21?'Gym: bovenlichaam, core, lichte eenbenige kracht':'Lichte activatie';
+var gB=w<=12?'Gym B: zwaar onderlichaam':w<=19?'Gym B: 1 zware beensessie (lichter bij lange duurloop vanaf 24 km)':w==20?'Gym B: laatste zware beensessie':w==21?'Gym B: alleen lichte beensessie':null;
+var ma=[['rust','Vaste rustdag']];if(b2b)ma.push(['zwem','Tweede zwem: 1–1,5 km rustig (avond)']);
+var d3=[];if(dp)d3.push(['run',n(dp)+(w==22?'':' rustig')]);if(gB)d3.push(['gym',gB]);
+var zi=zo==='RACE'?[['race','Kwart marathon en marathon, 52,7 km']]:zo==='-'?[w<=19?['zwem','Zwemmen of herstelfiets, max 45–60 min']:['rust','Rust']]:[['run',n(zo)+(zo.indexOf('test')>-1?'':b2b?' rustig, back-to-back':' rustig')]];
+return [ma,[['run',n(di)+(w==22?'':' rustig')],['gym',gA]],[['kwal',n(wo)]],d3,
+[w==22?['rust','Rust of 1 km zwemmen']:['zwem',[14,15,17,18].indexOf(w)>-1?'Zwemmen, max 1,5 km rustig (avond)':'Zwemmen 1,5–2,5 km rustig (avond)']],
+[['lang',/^\d/.test(za)?n(za):za]],zi];
+}
+function fd(d){return d.getDate()+' '+MN[d.getMonth()]}
+var out='';
+WK.forEach(function(r,i){
+var w=i+1,ph=w<=4?0:w<=12?1:w<=16?2:w<=19?3:4,days=build(i),tot=0,done=0,rows='';
+days.forEach(function(its,j){
+var date=new Date(2026,10,9+7*i+j),act=its.some(function(x){return x[0]!=='rust'}),k=w+'-'+j;
+if(act){tot++;if(st[k])done++}
+var tdy=(i*7+j)===dd;
+rows+='<div class="day'+(tdy?' today':'')+'">'+(act?'<input type="checkbox" aria-label="Afgevinkt" data-k="'+k+'"'+(st[k]?' checked':'')+'>':'<span style="width:22px;flex:none"></span>')+
+'<div class="dn">'+DN[j]+'<small>'+date.getDate()+'</small></div><div class="its">'+
+its.map(function(x){return '<div class="it"><span class="chip '+x[0]+'">'+T[x[0]]+'</span><span>'+x[1]+'<span class="z" data-z="'+zk(x)+'"></span></span></div>'}).join('')+(dayKm(its)>0?'<label class="ak">Gelopen<input type="text" inputmode="decimal" data-a="'+k+'" placeholder="'+f1(dayKm(its))+'" value="'+(ACT[k]!=null?String(ACT[k]).replace('.',','):'')+'" aria-label="Gelopen kilometers"> km</label>':'')+(dayKm(its)>0?'<label class="ak">Tempo<input type="text" inputmode="numeric" data-p="'+k+'" placeholder="5:40" value="'+(EFF[k]&&EFF[k].p?mm(EFF[k].p):'')+'" aria-label="Gemiddeld tempo per km"> /km · HR<input type="text" inputmode="numeric" data-h="'+k+'" placeholder="140" value="'+(EFF[k]&&EFF[k].h?EFF[k].h:'')+'" aria-label="Gemiddelde hartslag"></label>':'')+'</div></div>';
+});
+var s=new Date(2026,10,9+7*i),e=new Date(2026,10,9+7*i+6);
+out+='<details style="--pc:'+PC[ph]+'" class="'+(i===cur?'now':'')+'"'+(i===cur?' open':'')+' data-w="'+i+'"><summary><span class="wn">'+w+'</span><span class="sm"><b>'+r[1]+'</b><small>'+fd(s)+' – '+fd(e)+' · '+r[0]+' km</small></span><span class="pg" id="pg'+i+'">'+done+'/'+tot+'</span></summary><div class="days">'+rows+'</div></details>';
+});
+document.getElementById('weeks').innerHTML=out;
+document.getElementById('weeks').addEventListener('change',function(ev){
+var c=ev.target;if(!c.dataset.k)return;
+if(c.checked)st[c.dataset.k]=1;else delete st[c.dataset.k];
+save();renderStats();var d=c.closest('details'),all=d.querySelectorAll('input[type=checkbox]'),k=0;
+all.forEach(function(x){if(x.checked)k++});
+document.getElementById('pg'+d.dataset.w).textContent=k+'/'+all.length;
+});
+function lng(b){if(b.length<2)return '';b.sort(function(x,y){return x.i-y.i});var ref=med(b.map(function(x){return x.p})),hn=b.map(function(x){return x.h*x.p/ref});
+return '<h2 style="margin-top:16px">Lange duurlopen</h2><p class="note">Zelfde omrekening naar een vast tempo. Let op: lange duurlopen bevatten marathontempo-blokken en hartslagdrift, dus deze lijn is minder zuiver dan die voor de rustige runs. De waarschuwing gebruikt alleen de rustige runs.</p>'+effChart(hn)+'<p class="note">'+b.length+' lange runs · omgerekend naar '+mm(ref)+' /km · laatste: '+Math.round(hn[hn.length-1])+' slagen/min</p>'}
+function med(a){var b=a.slice().sort(function(x,y){return x-y}),m=Math.floor(b.length/2);return b.length%2?b[m]:(b[m-1]+b[m])/2}
+function avg(a){return a.reduce(function(x,y){return x+y},0)/a.length}
+function fillEff(){document.querySelectorAll('input[data-p]').forEach(function(i){var e=EFF[i.dataset.p];i.value=e&&e.p?mm(e.p):''});document.querySelectorAll('input[data-h]').forEach(function(i){var e=EFF[i.dataset.h];i.value=e&&e.h?e.h:''});refresh()}
+function effChart(hn){var W=660,H=190,l=40,r=12,t=12,b=26,n=hn.length,mn=Math.min.apply(null,hn)-4,mx=Math.max.apply(null,hn)+4,s='',pts=[],X=function(i){return l+i*(W-l-r)/(n-1)},Y=function(v){return t+(H-t-b)*(1-(v-mn)/(mx-mn))};
+[mn,(mn+mx)/2,mx].forEach(function(v){s+='<line x1="'+l+'" x2="'+(W-r)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="var(--line)"/><text x="'+(l-5)+'" y="'+(Y(v)+4)+'" text-anchor="end" font-size="11" fill="var(--mut)">'+Math.round(v)+'</text>'});
+hn.forEach(function(v,i){pts.push(X(i)+','+Y(v))});
+s+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="var(--p1)" stroke-width="2.5"/>';
+hn.forEach(function(v,i){s+='<circle cx="'+X(i)+'" cy="'+Y(v)+'" r="'+(i===n-1?5:3.5)+'" fill="var(--p1)"/>'});
+s+='<text x="'+(W/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="11" fill="var(--mut)">Rustige duurloop nr. (op volgorde)</text>';
+return '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto" role="img" aria-label="Geschatte hartslag bij vast tempo per rustige duurloop">'+s+'</svg>'}
+function renderEff(){var el=document.getElementById('be');if(!el)return;var a=[],b=[],q,m;
+for(q in EFF){var e=EFF[q];if(e.p>180&&e.p<600&&e.h>80&&e.h<220){m=q.split('-');var o={i:(+m[0]-1)*7+ +m[1],p:e.p,h:e.h},its=build(+m[0]-1)[+m[1]];if(isEasy(its))a.push(o);else if(+m[1]===5)b.push(o)}}
+a.sort(function(x,y){return x.i-y.i});var h0='<h2>Efficiëntie rustige duurlopen</h2>';
+if(a.length<2){el.innerHTML=h0+'<p class="note">Vul bij je rustige duurlopen (di, do, zo) je gemiddelde tempo en hartslag in. De grafiek verschijnt vanaf 2 runs, de waarschuwing vanaf 6.</p>'+lng(b);return}
+var ref=med(a.map(function(x){return x.p})),hn=a.map(function(x){return x.h*x.p/ref}),n=hn.length,sm='<p class="note">'+n+' runs · omgerekend naar '+mm(ref)+' /km · laatste run: '+Math.round(hn[n-1])+' slagen/min',msg='';
+if(n>=6){var rec=avg(hn.slice(n-3)),base=med(hn.slice(Math.max(0,n-11),n-3)),d=rec-base;sm+=' · eerste 3 gemiddeld '+Math.round(avg(hn.slice(0,3)))+', laatste 3 gemiddeld '+Math.round(rec);
+if(d>=10)msg='<div class="bad" style="padding:6px 10px;margin:8px 0"><b>Let op:</b> je hartslag bij hetzelfde tempo ligt gemiddeld ongeveer '+Math.round(d)+' slagen hoger dan je eerdere runs. Kijk eerst naar hitte, slaap, ziekte, cafeïne en wind. Is daar geen verklaring voor: 2–3 dagen rust. Houdt het aan, of heb je benauwdheid, duizeligheid, pijn op de borst of hartkloppingen: neem contact op met de huisarts.</div>';
+else if(d>=5)msg='<p><b>Even opletten:</b> je hartslag bij hetzelfde tempo ligt gemiddeld ongeveer '+Math.round(d)+' slagen hoger dan je eerdere runs. Kijk of je goed slaapt en hersteld bent.</p>';
+else msg='<p>Stabiel: je hartslag bij hetzelfde tempo wijkt gemiddeld '+(d>0?'+':'')+Math.round(d)+' slagen af van je eerdere runs.</p>'}
+else msg='<p class="note">Vanaf 6 runs krijg je een waarschuwing als je hartslag bij hetzelfde tempo stijgt.</p>';
+el.innerHTML=h0+'<p class="note">Geschatte hartslag bij een vast tempo, omgerekend uit al je runs. Lager is fitter; stijgt de lijn, dan kost hetzelfde tempo meer.</p>'+effChart(hn)+sm+'</p>'+msg+lng(b)+'<p class="note">Dit is een indicatie en geen diagnose. Hitte, wind, slaap, cafeïne en heuvels beïnvloeden je hartslag, en de omrekening is bij grote tempoverschillen minder nauwkeurig.</p>'}
+function kmOf(t){if(/^Dubbel/.test(t))return 36.5;if(/^\d+ min/.test(t))return 0;var m=/^(\d+(?:,\d)?)/.exec(t);return m?parseFloat(m[1].replace(',','.')):0}
+function f1(x){return (Math.round(x*10)/10).toString().replace('.',',')}
+function renderChart(PW,DW){var W=660,H=230,l=34,b=24,t=14,cw=(W-l)/22,mx=60,ch=H-b-t,s='',Y=function(v){return t+ch-v/mx*ch};
+[0,20,40,60].forEach(function(v){s+='<line x1="'+l+'" x2="'+W+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="var(--line)"/><text x="'+(l-5)+'" y="'+(Y(v)+4)+'" text-anchor="end" font-size="11" fill="var(--mut)">'+v+'</text>'});
+for(var i=0;i<22;i++){var c='var(--p'+(i<4?0:i<12?1:i<16?2:i<19?3:4)+')',x=l+i*cw+3,w=cw-6;
+s+='<rect x="'+x+'" y="'+Y(PW[i])+'" width="'+w+'" height="'+(PW[i]/mx*ch)+'" rx="3" fill="'+c+'" fill-opacity=".25" stroke="'+c+'" stroke-width="1"/>';
+if(DW[i]>0)s+='<rect x="'+(x+w*.2)+'" y="'+Y(DW[i])+'" width="'+(w*.6)+'" height="'+(DW[i]/mx*ch)+'" rx="2" fill="'+c+'"/>';
+s+='<text x="'+(x+w/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="10" font-weight="'+(i===cur?700:400)+'" fill="'+(i===cur?'var(--ink)':'var(--mut)')+'">'+(i+1)+'</text>';
+if(i===cur)s+='<rect x="'+(x-2)+'" y="'+t+'" width="'+(w+4)+'" height="'+(ch+2)+'" rx="4" fill="none" stroke="var(--ink)" stroke-dasharray="3 3"/>'}
+document.getElementById('bc').innerHTML='<h2>Km per week: plan en gelopen</h2><svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto" role="img" aria-label="Geplande en afgevinkte kilometers per week">'+s+'</svg><div class="legend"><span>Vlak met rand: gepland</span><span>Gevulde balk: gelopen (of afgevinkt)</span><span>Stippellijn: huidige week</span></div><p class="note">Kleur per fase; de horizontale as toont het weeknummer.</p>'}
+function renderStats(){
+var dif=0,nA=0,PW=[],DW=[],P={km:0,run:0,sw:0,gy:0,days:0},Q={km:0,run:0,sw:0,gy:0,days:0},lg=0,lgP=0,wkc=0,thisD=0,thisP=0,pk=0;
+for(var i=0;i<22;i++){var ds=build(i),all=true,wp=0,wd=0,any=false;
+ds.forEach(function(its,j){var act=false,km=0,r=0,s=0,g=0;
+its.forEach(function(x){var t=x[0];if(t==='rust')return;act=true;if(t==='zwem')s++;else if(t==='gym')g++;else if(t!=='race'){r++;km+=kmOf(x[1])}});
+if(!act)return;any=true;var ok=!!st[(i+1)+'-'+j];P.days++;P.km+=km;P.run+=r;P.sw+=s;P.gy+=g;wp+=km;if(j===5&&km>lgP)lgP=km;
+if(ok){var ky=(i+1)+'-'+j,rk=ACT[ky]!=null?ACT[ky]:km;if(ACT[ky]!=null){dif+=rk-km;nA++}Q.days++;Q.km+=rk;Q.run+=r;Q.sw+=s;Q.gy+=g;wd+=rk;if(j===5&&rk>lg)lg=rk}else all=false});
+PW.push(wp);DW.push(wd);if(any&&all)wkc++;if(wp>pk)pk=wp;if(i===cur){thisD=wd;thisP=wp}}
+var pc=P.km?Math.round(Q.km/P.km*100):0;
+document.getElementById('bs').innerHTML='<h2>Trainingsblok</h2><div class="sg" style="grid-template-columns:1fr"><div><b>'+f1(Q.km)+' km</b><span>gelopen van '+f1(P.km)+' km gepland ('+pc+'%), exclusief de 52,7 km op de wedstrijddag</span></div></div><div class="bar"><i style="width:'+pc+'%"></i></div>'+
+'<div class="sg"><div><b>'+Q.run+'/'+P.run+'</b><span>looptrainingen</span></div><div><b>'+Q.sw+'/'+P.sw+'</b><span>zwemsessies</span></div><div><b>'+Q.gy+'/'+P.gy+'</b><span>gymsessies</span></div><div><b>'+Q.days+'/'+P.days+'</b><span>trainingsdagen afgevinkt</span></div><div><b>'+wkc+'/22</b><span>weken volledig afgerond</span></div><div><b>'+f1(lg)+' km</b><span>langste duurloop (plan: '+f1(lgP)+')</span></div><div><b>'+f1(thisD)+'/'+f1(thisP)+' km</b><span>deze week (week '+(cur+1)+')</span></div><div><b>'+f1(pk)+' km</b><span>piekweek in het plan</span></div><div><b>'+(dif>0?'+':'')+f1(dif)+' km</b><span>verschil met plan ('+nA+' dagen ingevuld)</span></div></div>'+
+'<p class="note" style="margin-top:10px">Vul per dag je gelopen kilometers in (tab Schema). Zonder invoer telt het geplande aantal zodra je de dag afvinkt.</p>';renderChart(PW,DW);renderEff()}
+document.getElementById('weeks').addEventListener('input',function(ev){var c=ev.target,k=c.dataset&&c.dataset.a;if(c.dataset&&(c.dataset.p||c.dataset.h)){var q=c.dataset.p||c.dataset.h,e=EFF[q]||(EFF[q]={});if(c.dataset.p)e.p=sec(c.value)||0;else e.h=+c.value||0;if(!e.p&&!e.h)delete EFF[q];if(e.p&&e.h&&!st[q]){st[q]=1;var cb2=document.querySelector('input[data-k="'+q+'"]');if(cb2)cb2.checked=true}try{localStorage.setItem('mt27e',JSON.stringify(EFF))}catch(x){}save();refresh();return}if(!k)return;var v=parseFloat(c.value.replace(',','.'));
+if(isNaN(v)||v<0||v>100)delete ACT[k];else{ACT[k]=v;if(!st[k]){st[k]=1;var cb=document.querySelector('input[data-k="'+k+'"]');if(cb)cb.checked=true}}
+try{localStorage.setItem('mt27a',JSON.stringify(ACT))}catch(e){}save();refresh()});
+renderStats();applyZ();renderZones();initForm();var left=Math.round((R-now)/D);
+document.getElementById('cd').textContent=left>0?left:left==0?'Vandaag!':'Klaar';
+if(dd<0){document.getElementById('wk').textContent='Start 9 nov';document.getElementById('wks').textContent='eerste trainingsweek'}
+else if(dd>=154){document.getElementById('wk').textContent='Race';document.getElementById('wks').textContent='wedstrijdweek'}
+else{document.getElementById('wk').textContent='Week '+(cur+1)+'/22';document.getElementById('wks').textContent=WK[cur][0]+' km gepland'}
+document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){
+document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected',x===b)});
+['s','b','z','r'].forEach(function(id){document.getElementById(id).hidden=id!==b.dataset.t});
+});});
+(async function(){try{var u=await claude.use('user'),db=await claude.use('db');if(!u||!db)return;var id=await u.id();if(!id)return;
+var r=db.doc('data/users/'+id+'/progress'),s=await r.get();
+if(s.exists){var d=s.data().done,pf=s.data().prof,ac=s.data().act,ef=s.data().eff;if(ef&&typeof ef==='object'){EFF=ef;try{localStorage.setItem('mt27e',JSON.stringify(EFF))}catch(e){}fillEff()}if(ac&&typeof ac==='object'){ACT=ac;try{localStorage.setItem('mt27a',JSON.stringify(ACT))}catch(e){}fillAct()}if(pf&&typeof pf==='object'){prof=pf;try{localStorage.setItem('mt27p',JSON.stringify(prof))}catch(e){}applyZ();renderZones();fillForm()}if(d&&typeof d==='object'){st=Object.assign({},d);try{localStorage.setItem('mt27',JSON.stringify(st))}catch(e){}refresh()}}
+else if(Object.keys(st).length){await r.set({done:st,prof:prof,act:ACT,eff:EFF})}
+ref=r}catch(e){}})();
+var nw=document.querySelector('details.now');if(nw&&dd>7)setTimeout(function(){nw.scrollIntoView({block:'start'})},50);
+</script>
+</body>
+</html>
